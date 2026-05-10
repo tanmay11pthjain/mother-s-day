@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Mother's Day 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #e8637a;
+    --blush: #f9c8d3;
+    --cream: #fff8f5;
+    --gold: #c9a96e;
+    --mauve: #b5688c;
+    --petal: #fde8ed;
+    --soft: #fdf0f3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── FLOATING PETALS CANVAS ── */
+  #petal-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(160deg, #fff0f4 0%, #ffe8f0 40%, #ffd6e8 100%);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(232,99,122,0.12) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(181,104,140,0.12) 0%, transparent 50%);
+  }
+
+  .hero-heart {
+    font-size: 4rem;
+    animation: heartbeat 1.4s ease-in-out infinite;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14%     { transform: scale(1.2); }
+    28%     { transform: scale(1); }
+    42%     { transform: scale(1.15); }
+    56%     { transform: scale(1); }
+  }
+
+  .hero-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: var(--mauve);
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 9vw, 7rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--rose);
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s forwards;
+    text-shadow: 0 4px 24px rgba(232,99,122,0.18);
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--mauve);
+  }
+
+  .hero-line {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 22px auto;
+    opacity: 0;
+    animation: fadeIn 1s 1.2s forwards;
+  }
+
+  .hero-shayri {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+    line-height: 1.9;
+    color: #7a3555;
+    max-width: 620px;
+    opacity: 0;
+    animation: fadeUp 1s 1.5s forwards;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(8px);
+    padding: 24px 32px;
+    border-radius: 20px;
+    border: 1px solid rgba(232,99,122,0.18);
+    box-shadow: 0 8px 40px rgba(232,99,122,0.1);
+    margin: 0 auto 8px;
+  }
+
+  .hero-photo-ring {
+    margin-top: 42px;
+    opacity: 0;
+    animation: fadeUp 1s 2s forwards;
+    position: relative;
+  }
+
+  .hero-photo-ring img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 12px 40px rgba(232,99,122,0.35);
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0px); }
+    50%      { transform: translateY(-14px); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    animation: fadeIn 1s 3s forwards;
+    color: var(--mauve);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid var(--rose);
+    border-bottom: 2px solid var(--rose);
+    transform: rotate(45deg);
+    animation: bounce 1.2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: rotate(45deg) translateY(0); }
+    50%      { transform: rotate(45deg) translateY(6px); }
+  }
+
+  /* ── STORY SECTIONS ── */
+  .story {
+    position: relative;
+    z-index: 1;
+  }
+
+  .story-chapter {
+    padding: 90px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .story-chapter.left  { grid-template-columns: 1fr 1fr; }
+  .story-chapter.right { grid-template-columns: 1fr 1fr; }
+  .story-chapter.center {
+    grid-template-columns: 1fr;
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .story-chapter.right .chapter-text { order: 2; }
+  .story-chapter.right .chapter-photo { order: 1; }
+
+  @media (max-width: 700px) {
+    .story-chapter.left,
+    .story-chapter.right {
+      grid-template-columns: 1fr;
+    }
+    .story-chapter.right .chapter-text,
+    .story-chapter.right .chapter-photo { order: unset; }
+  }
+
+  .chapter-bg-1 { background: linear-gradient(135deg, #fff5f8 0%, #ffe8f2 100%); }
+  .chapter-bg-2 { background: linear-gradient(135deg, #f8f0ff 0%, #ffe8f5 100%); }
+  .chapter-bg-3 { background: #fff8f5; }
+  .chapter-bg-4 { background: linear-gradient(135deg, #fff0ec 0%, #ffedf6 100%); }
+  .chapter-bg-5 { background: linear-gradient(135deg, #fdf6ff 0%, #fde8f0 100%); }
+  .chapter-bg-6 { background: linear-gradient(160deg, #fff0f5, #fce8ff); }
+
+  /* PHOTO FRAME STYLES */
+  .chapter-photo {
+    position: relative;
+  }
+
+  .photo-frame {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(181,104,140,0.22);
+    transform: rotate(-1.5deg);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  }
+
+  .photo-frame:hover {
+    transform: rotate(0deg) scale(1.03);
+    box-shadow: 0 30px 80px rgba(181,104,140,0.35);
+  }
+
+  .photo-frame.tilt-right { transform: rotate(1.8deg); }
+  .photo-frame.tilt-right:hover { transform: rotate(0deg) scale(1.03); }
+
+  .photo-frame img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .photo-badge {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 56px;
+    height: 56px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    animation: spin-slow 6s linear infinite;
+  }
+
+  @keyframes spin-slow {
+    0%   { transform: rotate(0deg) scale(1); }
+    50%  { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+
+  /* TEXT */
+  .chapter-text {
+    padding: 10px 0;
+  }
+
+  .chapter-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+    margin-bottom: 14px;
+    padding: 5px 14px;
+    background: rgba(201,169,110,0.1);
+    border-radius: 100px;
+    border: 1px solid rgba(201,169,110,0.3);
+  }
+
+  .chapter-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: #5a1f3a;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .chapter-heading em {
+    color: var(--rose);
+    font-style: italic;
+  }
+
+  .chapter-body {
+    font-size: 1rem;
+    color: #7a4560;
+    line-height: 1.85;
+    font-weight: 300;
+  }
+
+  .chapter-quote {
+    margin-top: 22px;
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 1.05rem;
+    color: var(--mauve);
+    background: rgba(255,255,255,0.7);
+    padding: 16px 20px;
+    border-left: 3px solid var(--rose);
+    border-radius: 0 12px 12px 0;
+    font-style: italic;
+  }
+
+  /* ── STRIP SECTION (horizontal scroll photos) ── */
+  .strip-section {
+    position: relative;
+    z-index: 1;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #fce8f4 0%, #fde8ec 100%);
+    overflow: hidden;
+  }
+
+  .strip-label {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--mauve);
+    margin-bottom: 30px;
+    font-style: italic;
+  }
+
+  .strip-track {
+    display: flex;
+    gap: 20px;
+    padding: 10px 40px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .strip-track::-webkit-scrollbar { display: none; }
+
+  .strip-card {
+    flex: 0 0 260px;
+    scroll-snap-align: center;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(181,104,140,0.18);
+    transition: transform 0.4s ease;
+    position: relative;
+  }
+
+  .strip-card:hover { transform: translateY(-8px) scale(1.02); }
+
+  .strip-card img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .strip-card-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(90,30,58,0.75));
+    color: white;
+    padding: 30px 16px 14px;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+
+  /* ── BIG QUOTE SECTION ── */
+  .quote-section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 20px;
+    background: linear-gradient(160deg, #5a1f3a 0%, #8b3060 50%, #b5688c 100%);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .quote-section::before {
+    content: '❝';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14rem;
+    color: rgba(255,255,255,0.05);
+    font-family: Georgia, serif;
+    pointer-events: none;
+  }
+
+  .big-shayri {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    color: white;
+    line-height: 1.9;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s, transform 0.9s;
+  }
+
+  .big-shayri.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .quote-hearts {
+    font-size: 2rem;
+    letter-spacing: 12px;
+    animation: pulse-row 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-row {
+    0%,100% { opacity: 1; letter-spacing: 12px; }
+    50%      { opacity: 0.6; letter-spacing: 18px; }
+  }
+
+  /* ── GRAND FINALE ── */
+  .finale {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(160deg, #fff5f8 0%, #ffe0ec 50%, #ffd6e8 100%);
+    overflow: hidden;
+  }
+
+  .finale-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 520px;
+    margin: 0 auto 44px;
+    opacity: 0;
+    animation: zoomIn 1s 0.3s forwards;
+  }
+
+  @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .finale-photo-grid img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 3px solid white;
+    box-shadow: 0 8px 24px rgba(181,104,140,0.2);
+    transition: transform 0.4s ease;
+  }
+
+  .finale-photo-grid img:hover { transform: scale(1.08) rotate(2deg); }
+  .finale-photo-grid img:nth-child(2) { transform: translateY(-10px); }
+  .finale-photo-grid img:nth-child(2):hover { transform: translateY(-10px) scale(1.08); }
+
+  .finale-heart-burst {
+    font-size: 3rem;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .finale-heart-burst span {
+    display: inline-block;
+    animation: burst 2.5s ease-in-out infinite;
+  }
+
+  .finale-heart-burst span:nth-child(1) { animation-delay: 0s; }
+  .finale-heart-burst span:nth-child(2) { animation-delay: 0.3s; }
+  .finale-heart-burst span:nth-child(3) { animation-delay: 0.6s; }
+  .finale-heart-burst span:nth-child(4) { animation-delay: 0.9s; }
+  .finale-heart-burst span:nth-child(5) { animation-delay: 1.2s; }
+
+  @keyframes burst {
+    0%,100% { transform: scale(1) rotate(0deg); }
+    50%      { transform: scale(1.4) rotate(-10deg); }
+  }
+
+  .finale-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 700;
+    color: var(--rose);
+    line-height: 1.1;
+    text-shadow: 0 4px 20px rgba(232,99,122,0.25);
+    margin-bottom: 20px;
+  }
+
+  .finale-title em { color: var(--mauve); font-style: italic; }
+
+  .finale-message {
+    font-size: 1.1rem;
+    color: #7a4060;
+    max-width: 480px;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .finale-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 14px 28px;
+    border-radius: 100px;
+    box-shadow: 0 8px 32px rgba(232,99,122,0.2);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--mauve);
+    border: 2px solid rgba(232,99,122,0.15);
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* GENERAL ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── RIBBON DIVIDER ── */
+  .ribbon {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.4rem;
+    letter-spacing: 16px;
+    color: var(--blush);
+    background: white;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── SPARKLE ── */
+  .sparkle {
+    position: absolute;
+    pointer-events: none;
+    animation: sparkle-anim var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+  }
+
+  @keyframes sparkle-anim {
+    0%,100% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50%      { transform: scale(1) rotate(180deg); opacity: 1; }
+  }
+
+  /* ── CONFETTI BURST on load ── */
+  .confetti-piece {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    top: -10px;
+    border-radius: 50%;
+    animation: confetti-fall linear forwards;
+    z-index: 999;
+    pointer-events: none;
+  }
+
+  @keyframes confetti-fall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── STAGE PERFORMANCE SPECIAL ── */
+  .stage-special {
+    position: relative;
+    z-index: 1;
+    padding: 80px 20px;
+    background: linear-gradient(160deg, #1a0a2e 0%, #3d1158 50%, #6b2a7a 100%);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .stage-lights {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 200px;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px, transparent 60px,
+      rgba(255,220,150,0.04) 60px, rgba(255,220,150,0.04) 80px
+    );
+    animation: lights-move 4s linear infinite;
+  }
+
+  @keyframes lights-move {
+    from { background-position: 0 0; }
+    to   { background-position: 80px 0; }
+  }
+
+  .stage-special .photo-frame {
+    max-width: 380px;
+    margin: 0 auto 36px;
+    transform: rotate(0deg);
+    border: 4px solid rgba(255,200,100,0.4);
+    box-shadow: 0 0 60px rgba(255,180,50,0.25), 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .stage-special .photo-frame img {
+    height: 400px;
+  }
+
+  .stage-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: #ffd89b;
+    font-style: italic;
+    text-shadow: 0 0 30px rgba(255,200,100,0.5);
+    margin-bottom: 16px;
+  }
+
+  .stage-body {
+    color: rgba(255,220,180,0.85);
+    font-size: 1rem;
+    line-height: 1.85;
+    max-width: 480px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+</style>
+</head>
+<body>
+
+<canvas id="petal-canvas"></canvas>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-heart">💖</div>
+  <p class="hero-subtitle">A Love Story — For the Most Special Person</p>
+  <h1 class="hero-title">Happy <em>Mother's</em><br>Day</h1>
+  <div class="hero-line"></div>
+  <div class="hero-shayri">
+    पूरी दुनिया के लिए तुम मेरी माँ हो,<br>
+    लेकिन मेरे लिए तुम पूरी दुनिया हो।
+  </div>
+  <div class="hero-photo-ring">
+    <img src="photo7.webp" alt="Mother's Day">
+  </div>
+  <div class="scroll-hint">
+    <span>scroll to explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ── CHAPTER 1 ── -->
+<section class="chapter-bg-1">
+  <div class="story-chapter left">
+    <div class="chapter-photo reveal-left">
+      <div class="photo-frame">
+        <img src="photo1.jpg" alt="Mountain adventure">
+        <div class="photo-badge">🏔️</div>
+      </div>
+    </div>
+    <div class="chapter-text reveal-right">
+      <span class="chapter-tag">Chapter One</span>
+      <h2 class="chapter-heading">You showed us<br><em>the whole world</em></h2>
+      <p class="chapter-body">
+        On top of mountains, with clouds beneath our feet — you were there, 
+        laughing, guiding, making even the steep paths feel like home. 
+        Every adventure with you becomes a cherished memory painted in gold.
+      </p>
+      <div class="chapter-quote">
+        जहाँ तुम साथ हो, वहाँ हर राह आसान है।
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ribbon">✿ ♡ ✿ ♡ ✿ ♡ ✿ ♡ ✿</div>
+
+<!-- ── CHAPTER 2 ── -->
+<section class="chapter-bg-2">
+  <div class="story-chapter right">
+    <div class="chapter-photo reveal-right">
+      <div class="photo-frame tilt-right">
+        <img src="photo2.webp" alt="Proud moment">
+        <div class="photo-badge">🌟</div>
+      </div>
+    </div>
+    <div class="chapter-text reveal-left">
+      <span class="chapter-tag">Chapter Two</span>
+      <h2 class="chapter-heading">Our <em>biggest fan</em>,<br>our loudest cheer</h2>
+      <p class="chapter-body">
+        In every achievement, at every milestone — you stand beside us 
+        with that quiet pride in your eyes. Your presence is the greatest 
+        award we could ever receive.
+      </p>
+      <div class="chapter-quote">
+        माँ की दुआओं से रोशन है मेरी हर राह।
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ribbon">✿ ♡ ✿ ♡ ✿ ♡ ✿ ♡ ✿</div>
+
+<!-- ── BIG QUOTE ── -->
+<section class="quote-section">
+  <p class="big-shayri" id="bigShayri">
+    पूरी दुनिया के लिए तुम मेरी माँ हो,<br>
+    लेकिन मेरे लिए तुम पूरी दुनिया हो।
+  </p>
+  <div class="quote-hearts">💕 💗 💖 💗 💕</div>
+</section>
+
+<!-- ── STAGE PERFORMANCE ── -->
+<section class="stage-special">
+  <div class="stage-lights"></div>
+  <div class="reveal">
+    <div class="photo-frame" style="max-width:380px;margin:0 auto 36px;">
+      <img src="photo3.jpg" alt="On stage" style="height:400px;">
+    </div>
+  </div>
+  <h2 class="stage-heading reveal">The Star of Every Stage</h2>
+  <p class="stage-body reveal">
+    When you take the stage, the whole world stops. 
+    Your grace, your poise, your brilliance — you are a performer, 
+    a leader, a queen. We watch you and think: 
+    <em style="color:#ffd89b;">"That is our Maa."</em>
+  </p>
+</section>
+
+<div class="ribbon">✿ ♡ ✿ ♡ ✿ ♡ ✿ ♡ ✿</div>
+
+<!-- ── CHAPTER 3: Sunset ── -->
+<section class="chapter-bg-4">
+  <div class="story-chapter left">
+    <div class="chapter-photo reveal-left">
+      <div class="photo-frame">
+        <img src="photo4.jpg" alt="Sunset together">
+        <div class="photo-badge">🌅</div>
+      </div>
+    </div>
+    <div class="chapter-text reveal-right">
+      <span class="chapter-tag">Chapter Three</span>
+      <h2 class="chapter-heading">Sunsets are <em>prettier</em><br>when you're near</h2>
+      <p class="chapter-body">
+        Golden hour by the water — your smile matching the glow of the sky. 
+        In every ordinary evening you make magic. 
+        Home isn't a place; home is wherever you are.
+      </p>
+      <div class="chapter-quote">
+        तुम्हारे साथ हर पल, एक खूबसूरत याद बन जाता है।
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STRIP SECTION ── -->
+<section class="strip-section">
+  <p class="strip-label">Moments We'll Treasure Forever ✨</p>
+  <div class="strip-track">
+    <div class="strip-card">
+      <img src="photo5.jpg" alt="Flowers">
+      <div class="strip-card-caption">Among the blossoms 🌸</div>
+    </div>
+    <div class="strip-card">
+      <img src="photo6.webp" alt="By the lake">
+      <div class="strip-card-caption">By the peaceful lake 🌊</div>
+    </div>
+    <div class="strip-card">
+      <img src="photo1.jpg" alt="Mountains">
+      <div class="strip-card-caption">On top of the world 🏔️</div>
+    </div>
+    <div class="strip-card">
+      <img src="photo4.jpg" alt="Sunset">
+      <div class="strip-card-caption">Golden hour together 🌅</div>
+    </div>
+    <div class="strip-card">
+      <img src="photo2.webp" alt="Event">
+      <div class="strip-card-caption">Our proudest moment 🌟</div>
+    </div>
+  </div>
+</section>
+
+<div class="ribbon">✿ ♡ ✿ ♡ ✿ ♡ ✿ ♡ ✿</div>
+
+<!-- ── CHAPTER 4: Garden ── -->
+<section class="chapter-bg-5">
+  <div class="story-chapter right">
+    <div class="chapter-photo reveal-right">
+      <div class="photo-frame tilt-right">
+        <img src="photo5.jpg" alt="Garden">
+        <div class="photo-badge">🌸</div>
+      </div>
+    </div>
+    <div class="chapter-text reveal-left">
+      <span class="chapter-tag">Chapter Four</span>
+      <h2 class="chapter-heading">Like flowers,<br>you <em>bloom</em> us</h2>
+      <p class="chapter-body">
+        Just like those vibrant pink blossoms behind you — 
+        you have nurtured us, watered us with love, 
+        and helped us grow into who we are today.
+      </p>
+      <div class="chapter-quote">
+        माँ, तुम वो बगीचा हो जहाँ हम खिले हैं।
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINALE ── -->
+<section class="finale" id="finale">
+  <div class="finale-heart-burst">
+    <span>💖</span><span>💕</span><span>💗</span><span>💕</span><span>💖</span>
+  </div>
+  <div class="finale-photo-grid">
+    <img src="photo6.webp" alt="Lake">
+    <img src="photo7.webp" alt="Mother's Day" style="transform:translateY(-10px)">
+    <img src="photo3.jpg" alt="Stage">
+  </div>
+  <h1 class="finale-title">To the World's<br><em>Most Wonderful</em><br>Maa 💐</h1>
+  <p class="finale-message">
+    Thank you for every hug, every sacrifice, every sleepless night, 
+    every proud smile, and every beautiful memory you've gifted us. 
+    Today and always — we celebrate YOU.
+  </p>
+  <div class="finale-stamp">
+    ✨ With all our love, always 💕
+  </div>
+</section>
+
+<script>
+// ── PETAL / HEART CANVAS ──
+const canvas = document.getElementById('petal-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const PETALS = [];
+const EMOJIS = ['🌸', '💕', '🌺', '✨', '💖', '🌷', '💗', '⭐'];
+
+class Petal {
+  constructor() { this.reset(true); }
+  reset(init = false) {
+    this.x = Math.random() * canvas.width;
+    this.y = init ? Math.random() * canvas.height : -30;
+    this.size = Math.random() * 16 + 12;
+    this.speedY = Math.random() * 1.2 + 0.4;
+    this.speedX = (Math.random() - 0.5) * 0.8;
+    this.angle = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.06;
+    this.emoji = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+    this.opacity = Math.random() * 0.5 + 0.3;
+    this.wobble = Math.random() * Math.PI * 2;
+    this.wobbleSpeed = Math.random() * 0.03 + 0.01;
+  }
+  update() {
+    this.wobble += this.wobbleSpeed;
+    this.x += this.speedX + Math.sin(this.wobble) * 0.5;
+    this.y += this.speedY;
+    this.angle += this.rotSpeed;
+    if (this.y > canvas.height + 40) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+    ctx.font = `${this.size}px serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(this.emoji, 0, 0);
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < 28; i++) PETALS.push(new Petal());
+
+function animatePetals() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  PETALS.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animatePetals);
+}
+animatePetals();
+
+// ── CONFETTI BURST on load ──
+function spawnConfetti() {
+  const colors = ['#e8637a','#f9c8d3','#c9a96e','#b5688c','#fde8ed','#fff','#ff9eb5'];
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.width = (Math.random() * 8 + 4) + 'px';
+    el.style.height = (Math.random() * 8 + 4) + 'px';
+    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    const dur = (Math.random() * 2 + 2).toFixed(2) + 's';
+    el.style.animationDuration = dur;
+    el.style.animationDelay = (Math.random() * 1.5).toFixed(2) + 's';
+    document.body.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+}
+window.addEventListener('load', spawnConfetti);
+
+// ── INTERSECTION OBSERVER ──
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // stagger children if needed
+    }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => observer.observe(el));
+
+// big shayri observer
+const bigShayri = document.getElementById('bigShayri');
+const shayriObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) bigShayri.classList.add('visible'); });
+}, { threshold: 0.3 });
+shayriObs.observe(bigShayri);
+
+// ── MOUSE SPARKLE ──
+document.addEventListener('mousemove', (e) => {
+  if (Math.random() > 0.85) {
+    const sp = document.createElement('span');
+    sp.style.cssText = `
+      position:fixed; left:${e.clientX}px; top:${e.clientY}px;
+      pointer-events:none; z-index:9999;
+      font-size:${Math.random()*14+8}px;
+      animation:fadeUp 0.9s ease forwards;
+    `;
+    const em = ['✨','💕','🌸','💖','⭐','🌷'];
+    sp.textContent = em[Math.floor(Math.random()*em.length)];
+    document.body.appendChild(sp);
+    setTimeout(() => sp.remove(), 900);
+  }
+});
+</script>
+</body>
+</html>
